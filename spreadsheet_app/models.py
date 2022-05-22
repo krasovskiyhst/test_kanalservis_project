@@ -10,6 +10,3 @@ class Order(models.Model):
     class Meta:
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
-    #
-    # def __str__(self):
-    #     return f'{self.order_number} {self.cost_in_rubles} {self.cost_in_dollar}  {self.delivery_time}'
