@@ -37,7 +37,7 @@ RUN addgroup -S app && adduser -S app -G app
 
 # создание каталога для приложения
 ENV HOME=/home
-ENV APP_HOME=/home/web
+ENV APP_HOME=/home/backend
 RUN mkdir $APP_HOME
 RUN mkdir $APP_HOME/static
 RUN mkdir $APP_HOME/media
@@ -61,4 +61,4 @@ RUN chown -R app:app $APP_HOME
 # изменение рабочего пользователя
 USER app
 
-ENTRYPOINT ["/home/web/entrypoint.prod.sh"]
+ENTRYPOINT ["/home/backend/entrypoint.prod.sh"]
