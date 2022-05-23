@@ -50,7 +50,7 @@ COPY --from=builder /usr/src/requirements.txt .
 RUN pip install --no-cache /wheels/*
 
 # копирование entrypoint-prod.sh
-RUN chmod 774 ./entrypoint.prod.sh
+RUN chmod 774 entrypoint.prod.sh
 COPY ./entrypoint.prod.sh $APP_HOME
 
 # копирование проекта Django
