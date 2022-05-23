@@ -15,7 +15,8 @@ fi
 python manage.py flush --no-input
 # Выполняем миграции
 python manage.py migrate
+
 # Собираем статику
-python manage.py collectstatic
+python manage.py collectstatic --no-input
 
 exec "$@"

@@ -10,12 +10,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY', default='km2034t9i90dsfg2-039ttgik-s[;fg')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.getenv('DEBUG', default=1))
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(' ')
+
+ALLOWED_HOSTS = ['*']
+if not DEBUG:
+    ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(' ')
 
 # Application definition
 
@@ -32,6 +35,7 @@ INSTALLED_APPS = [
 
     'django_celery_results',
     'django_celery_beat',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
