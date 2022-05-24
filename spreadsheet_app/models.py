@@ -8,5 +8,6 @@ class Order(models.Model):
     delivery_time = models.DateField(verbose_name='Срок поставки')
 
     class Meta:
+        ordering = ['id']
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'

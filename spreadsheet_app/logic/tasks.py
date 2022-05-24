@@ -82,4 +82,4 @@ def get_and_write_an_order_in_the_database():
     for order_bd in orders_bd:
         if order_bd not in list_rows:
             # Если заказа из таблицы нет в БД, то удаляем
-            Order.objects.filter(id=order_bd).delete()
+            Order.objects.get(id=order_bd).delete()

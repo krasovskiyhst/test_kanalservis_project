@@ -6,8 +6,8 @@ services:
       context: .
       dockerfile: Dockerfile
     command: gunicorn test_kanalservis_project.wsgi:application --bind 0.0.0.0:8000
-    expose:
-      - 8000
+    ports:
+      - "8000:8000"
     volumes:
       - static_volume:/home/backend/static
       - media_volume:/home/backend/media
@@ -25,16 +25,6 @@ services:
       - postgres_volume:/var/lib/postgresql/data/
     env_file:
       - ./.env.prod
-
-  nginx:
-    build: ./nginx
-    volumes:
-      - static_volume:/home/backend/static
-      - media_volume:/home/backend/media
-    ports:
-      - 80:80
-    depends_on:
-      - backend
 
   redis:
     image: redis:alpine
@@ -68,13 +58,24 @@ services:
   frontend:
     build: ./frontend
 
-    ports:
-      - "3000:3000"
+    volumes:
+      - build_folder:/frontend/build
     depends_on:
       - backend
-    command: npm start
+    command: serve -s build -l 8080
+
+  nginx:
+    build: ./nginx
+    volumes:
+      - build_folder:/var/www/frontend
+    ports:
+      - 80:8080
+    depends_on:
+      - backend
+      - frontend
 
 volumes:
   postgres_volume:
   static_volume:
   media_volume:
+  build_folder:
