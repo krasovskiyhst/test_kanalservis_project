@@ -53,10 +53,11 @@ MIDDLEWARE = [
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
     'http://127.0.0.1:3000',
+    '188.225.11.117:3000'
 )
-if not DEBUG:
-    # IP адрес сервера из переменной вирт. окружения
-    CORS_ORIGIN_WHITELIST = tuple(os.getenv('ALLOWED_HOSTS').split(' ')[-1] + ':3000')
+# if not DEBUG:
+#     # IP адрес сервера из переменной вирт. окружения
+#     CORS_ORIGIN_WHITELIST = tuple(os.getenv('ALLOWED_HOSTS').split(' ')[-1] + ':3000')
 
 ROOT_URLCONF = 'test_kanalservis_project.urls'
 
