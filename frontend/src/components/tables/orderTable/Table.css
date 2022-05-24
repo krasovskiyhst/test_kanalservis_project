@@ -1,0 +1,22 @@
+table {
+    background-color: #07101D;
+    border-spacing: 1px;
+    width: 100%;
+    margin: 20px 0;
+}
+
+tr {
+    height: 32px;
+    position: sticky;
+    color: #07101D;
+}
+
+th {
+    color: #fff;
+    background-color: #07101D;
+}
+td {
+    background: #E9F2FF;
+    text-align: right;
+}
+

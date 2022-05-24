@@ -1,0 +1,19 @@
+header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #97F1A1;
+}
+
+.logo {
+  margin: 30px;
+}
+
+.logo-img {
+    width: 100%;
+}
+.main {
+    display: flex;
+    width: 100%;
+}
