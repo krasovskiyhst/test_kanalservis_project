@@ -76,6 +76,4 @@ services:
 
 volumes:
   postgres_volume:
-  static_volume:
-  media_volume:
   build_folder:
