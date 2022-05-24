@@ -44,7 +44,6 @@ def get_and_write_an_order_in_the_database():
 
     # Получение курса доллара
     dollar_value_curs = get_dollar_value_curs()
-    print(dollar_value_curs)
 
     list_rows = []  # Список номеров строк таблицы, для удаления не входящих в него заказов из БД
 
@@ -53,11 +52,7 @@ def get_and_write_an_order_in_the_database():
             id_n, order_number, cost_in_dollar, delivery_time = validation_row(row)
         except TypeError:
             # Если строка таблицы не прошла валидацию, то пропускаем её
-            print(row)
             continue
-
-        # Перевод в рубли
-        cost_in_rubles = round(cost_in_dollar * dollar_value_curs, 2)
 
         # Обновляем или создаём заказы, полученные по № строки из таблицы. № условно привязан к id(БД).
         availability_update = Order.objects.filter(id=id_n).update(
@@ -67,6 +62,9 @@ def get_and_write_an_order_in_the_database():
         )
         if not availability_update:
             # Если объект не найден, то создаём
+
+            cost_in_rubles = round(cost_in_dollar * dollar_value_curs, 2)   # Перевод в рубли
+
             Order.objects.create(
                 id=id_n,
                 order_number=order_number,
