@@ -22,6 +22,7 @@ RUN flake8 --ignore=E501,F401 /usr/src/test_kanalservis_project
 COPY ./requirements.txt .
 RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/wheels -r requirements.txt
 
+EXPOSE 8000
 
 #########
 # FINAL #
