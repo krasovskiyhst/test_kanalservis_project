@@ -1,9 +1,7 @@
 from rest_framework import viewsets
 from spreadsheet_app.models import Order
 from rest_api.serializers import OrderSerializer, OrderChartSerializer
-from django.db.models import Count, Sum
-
-from spreadsheet_app.logic.tasks import get_and_write_an_order_in_the_database
+from django.db.models import Sum
 
 
 class OrderViewSet(viewsets.ModelViewSet):
