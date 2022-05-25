@@ -2,6 +2,7 @@ from spreadsheet_app.logic.google_sheets_handler import GoogleSheetsHandler
 from spreadsheet_app.models import Order
 from datetime import datetime
 import urllib.request
+import urllib.error
 import xml.etree.cElementTree as ET
 from test_kanalservis_project.celery import app
 
@@ -9,7 +10,14 @@ from test_kanalservis_project.celery import app
 def get_dollar_value_curs():
     """ Получить курс доллара """
     url_cbr = 'https://www.cbr.ru/scripts/XML_daily.asp'
-    xml_file = urllib.request.urlopen(url_cbr)
+    try:
+        xml_file = urllib.request.urlopen(url_cbr)
+    except urllib.error.HTTPError as e:
+        print('Error code: ', e)
+        return
+    except urllib.error.URLError as e:
+        print('Reason: ', e)
+        return
     tree = ET.ElementTree(file=xml_file)
     root = tree.getroot()
     dollar_data = root.find("Valute[@ID='R01235']")
@@ -60,8 +68,8 @@ def get_and_write_an_order_in_the_database():
             cost_in_dollar=cost_in_dollar,
             delivery_time=delivery_time
         )
-        if not availability_update:
-            # Если объект не найден, то создаём
+        if not availability_update and dollar_value_curs:
+            # Если объект не найден и курс доллара получен, то создаём
 
             cost_in_rubles = round(cost_in_dollar * dollar_value_curs, 2)   # Перевод в рубли
 
